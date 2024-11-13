@@ -1,7 +1,9 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
     // Carregar dados de Porto Alegre ao iniciar
     await loadWeatherData("Porto Alegre");
 });
+
 
 
 
@@ -11,8 +13,13 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
     const cityName = document.querySelector('#city_name').value;
 
     if (!cityName) {
-        alert("Você precisar digitar uma cidade.");
+        Swal.fire({
+            
+            text: "Você precisa digitar uma cidade!",
+            icon: "warning"
+          });
         return;
+        
     }
 
     await loadWeatherData(cityName);
@@ -44,7 +51,11 @@ async function loadWeatherData(cityName) {
         const forecastJson = await forecastResults.json();
         showCurrentDayForecast(forecastJson);
     } else {
-        alert("Cidade não encontrada!\nTente novamente.");
+        Swal.fire({
+            
+            text: "Cidade não encontrada! Tente novamente.",
+            icon: "warning"
+          });
         return;
     }
 }
