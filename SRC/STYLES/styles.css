@@ -171,6 +171,7 @@ body {
     padding: 10px;
     background-color: #8ac0f7;
     border-radius: 8px;
+    min-width: 350px;
 }
 
 .day-forecast h3 {
