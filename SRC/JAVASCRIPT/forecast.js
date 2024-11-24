@@ -39,13 +39,20 @@ function displayForecast(forecastList) {
         const dayContainer = document.createElement('div');
         dayContainer.classList.add('day-forecast');
 
+        // Obtém a data correspondente ao primeiro item do dia
+        const firstItemDate = new Date(daysForecast[day][0].dt * 1000);
+        const formattedDate = firstItemDate.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit'
+        }); // Sem o ano
+
         const dayTitle = document.createElement('h3');
-        dayTitle.textContent = day.charAt(0).toUpperCase() + day.slice(1);
+        dayTitle.textContent = `${day.toUpperCase()} - ${formattedDate}`; // Adiciona a data sem o ano
         dayContainer.appendChild(dayTitle);
 
         const itemsContainer = document.createElement('div');
         itemsContainer.classList.add('forecast-items-container');
-        
+
         daysForecast[day].forEach((item) => {
             const time = new Date(item.dt * 1000).toLocaleTimeString('pt-BR', {
                 hour: '2-digit',
@@ -58,10 +65,11 @@ function displayForecast(forecastList) {
                 <p>${time}</p>
                 <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png" alt="${item.weather[0].description}">
                 <p>${item.main.temp.toFixed(1)}°C</p>
+                <p>${item.weather[0].description}</p> <!-- Alt exibido abaixo da imagem -->
             `;
             itemsContainer.appendChild(forecastItem);
         });
-        
+
         dayContainer.appendChild(itemsContainer);
         forecastContainer.appendChild(dayContainer);
     });
