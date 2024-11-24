@@ -206,7 +206,7 @@ body {
 }
 
 .forecast-item p {
-    font-size: 1.3rem; /* Ajusta o tamanho do texto para ser mais visível */
+    font-size: 1.2rem; /* Ajusta o tamanho do texto para ser mais visível */
     text-shadow: x y blur;
     text-align: center;
     
