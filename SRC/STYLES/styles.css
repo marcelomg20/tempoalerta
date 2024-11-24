@@ -177,8 +177,10 @@ body {
 
 .day-forecast h3 {
     margin: 0;
-    font-size: 1.1em;
-    color: #333;
+    font-size: 0.8em;
+    color: #02020274;
+    align-content: center;
+    text-transform: uppercase;
 }
 
 .day-forecast-items {
@@ -205,7 +207,7 @@ body {
 
 .forecast-item p {
     font-size: 1.3rem; /* Ajusta o tamanho do texto para ser mais visível */
-   
+    text-shadow: x y blur;
     text-align: center;
     
 }
