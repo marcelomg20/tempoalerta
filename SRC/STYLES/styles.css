@@ -170,7 +170,7 @@ body {
 .day-forecast {
     margin-bottom: 16px;
     padding: 10px;
-    background-color: #8ac0f7;
+    background-color: #f1bd11;
     border-radius: 8px;
     min-width: 330px;
 }
@@ -208,7 +208,7 @@ body {
 .forecast-item p {
     font-size: 1.0rem; /* Ajusta o tamanho do texto para ser mais visível */
     font-weight: 550;  
-    color: #ffffff;
+    color: #00000096;
     text-align: center;
     
     
