@@ -309,3 +309,35 @@ body {
     text-align: center;
     margin-top: 6px;
 }
+/* ===== BOX SATÉLITE MAPA REAL ===== */
+#satellite-box {
+    background-color: #051c5ce0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#satellite-box h3 {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#satellite-frame {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    z-index: 1;
+}
+
+.satellite-legenda {
+    font-size: 10px;
+    color: #d1d5db;
+    text-align: center;
+    margin-top: 6px;
+}
+.leaflet-control-attribution { display: none; }
