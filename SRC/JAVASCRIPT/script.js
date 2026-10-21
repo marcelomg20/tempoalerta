@@ -15,7 +15,6 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
     }
 
     await loadWeatherData(cityName);
-    // Salva para usar no forecast.html
     localStorage.setItem('selectedCity', cityName);
 });
 
@@ -64,7 +63,6 @@ function showInfo(json) {
 
 function showCurrentDayForecast(forecastJson) {
     const forecastContainer = document.querySelector("#forecast");
-    // CORREÇÃO DO ERRO DO SEU PRINT - se não existe, não tenta usar
     if (!forecastContainer) return;
     
     forecastContainer.innerHTML = "";
@@ -88,5 +86,6 @@ function showCurrentDayForecast(forecastJson) {
 }
 
 function showAlert(msg) {
-    document.querySelector('#alert').innerHTML = msg;
+    const alertEl = document.querySelector('#alert');
+    if(alertEl) alertEl.innerHTML = msg;
 }
