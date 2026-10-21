@@ -18,28 +18,27 @@
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
-        <div id="weather">
-            <h1 id="title"></h1>
-            <div id="forecast-container">
-                <div id="temp">
-                    <div id="left">
-                        <img id="temp_img" src="" alt="">
-                        <p id="temp_description"></p>
-                    </div>
-                    <div id="right">
-                        <p id="temp_value"><sup>°C</sup></p>
-                        <div id="additional-info">
-                            <p><i class="fa-solid fa-droplet"></i> <span id="humidity"></span></p>
-                            <p><i class="fa-solid fa-wind"></i> <span id="wind"></span></p>
-                        </div>
-                    </div>
-                </div>             
+     <div id="weather" class="unified-box">
+    <h1 id="title"></h1>
+    <div id="forecast-container">
+        <div id="temp">
+            <div id="left">
+                <img id="temp_img" src="" alt="">
+                <p id="temp_description"></p>
             </div>
-        </div>
+            <div id="right">
+                <p id="temp_value"><sup>°C</sup></p>
+                <div id="additional-info">
+                    <p><i class="fa-solid fa-droplet"></i> <span id="humidity"></span></p>
+                    <p><i class="fa-solid fa-wind"></i> <span id="wind"></span></p>
+                </div>
+            </div>
+        </div>             
+    </div>
+    <div id="satellite-frame" style="margin-top:15px; height:280px; border-radius:12px;"></div>
+</div>
 
-               <div id="satellite-box">
-            <div id="satellite-frame"></div>
-        </div>
+             
 
         <a href="forecast.html" class="forecast-link"><i class="fa-solid fa-calendar-alt"></i> Próximos dias</a>
         <a href="https://nivelguaiba.com.br/" class="inpe-link" target="_blank"><i class="fa-solid fa-water"></i> Nível do Guaíba</a>
