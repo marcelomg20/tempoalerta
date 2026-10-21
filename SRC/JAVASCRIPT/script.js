@@ -1,28 +1,22 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
-    // Carregar dados de Porto Alegre ao iniciar
     await loadWeatherData("Porto Alegre");
 });
 
-
-
-
 document.querySelector('#search').addEventListener('submit', async (event) => {
     event.preventDefault();
-
     const cityName = document.querySelector('#city_name').value;
 
     if (!cityName) {
         Swal.fire({
-            
             text: "Você precisa digitar uma cidade!",
             icon: "warning"
           });
         return;
-        
     }
 
     await loadWeatherData(cityName);
+    // Salva para usar no forecast.html
+    localStorage.setItem('selectedCity', cityName);
 });
 
 async function loadWeatherData(cityName) {
@@ -46,13 +40,11 @@ async function loadWeatherData(cityName) {
             humidity: json.main.humidity,
         });
 
-        // Exibir previsão do dia atual
         const forecastResults = await fetch(apiUrlForecast);
         const forecastJson = await forecastResults.json();
         showCurrentDayForecast(forecastJson);
     } else {
         Swal.fire({
-            
             text: "Cidade não encontrada! Tente novamente.",
             icon: "warning"
           });
@@ -72,6 +64,9 @@ function showInfo(json) {
 
 function showCurrentDayForecast(forecastJson) {
     const forecastContainer = document.querySelector("#forecast");
+    // CORREÇÃO DO ERRO DO SEU PRINT - se não existe, não tenta usar
+    if (!forecastContainer) return;
+    
     forecastContainer.innerHTML = "";
 
     const times = ["06:00:00", "12:00:00", "18:00:00"];
@@ -95,13 +90,3 @@ function showCurrentDayForecast(forecastJson) {
 function showAlert(msg) {
     document.querySelector('#alert').innerHTML = msg;
 }
-document.querySelector('#search').addEventListener('submit', async (event) => {
-    event.preventDefault();
-    
-    const cityName = document.querySelector('#city_name').value || 'Porto Alegre';
-    
-    // Armazena o nome da cidade no Local Storage
-    localStorage.setItem('selectedCity', cityName);
-    
-    // Código para buscar e exibir o clima atual...
-});
