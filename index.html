@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="SRC/STYLES/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <!-- Leaflet para satélite -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="icon" type="image/png" href="SRC/images/bandeirars.png">
@@ -14,7 +13,6 @@
 <body>
     <div id="alert"></div>
     <div id="container">
-        
         <form id="search">
             <i class="fa-solid fa-location-dot"></i>
             <input type="search" name="city_name" id="city_name" placeholder="Digite outra cidade">
@@ -40,11 +38,11 @@
             </div>
         </div>
 
-        <!-- BOX SATÉLITE - MAPA REAL, NUNCA FICA PRETO -->
+        <!-- BOX SATÉLITE COM NUVENS -->
         <div id="satellite-box">
             <h3><i class="fa-solid fa-satellite"></i> Satélite - Rio Grande do Sul</h3>
             <div id="satellite-frame"></div>
-            <p class="satellite-legenda">Esri World Imagery - Ao vivo</p>
+            <p class="satellite-legenda">Nuvens ao vivo - OpenWeather</p>
         </div>
 
         <a href="forecast.html" class="forecast-link"><i class="fa-solid fa-calendar-alt"></i> Próximos dias</a>
@@ -54,13 +52,20 @@
 
     <script src="SRC/JAVASCRIPT/script.js"></script>
     <script>
-        // Cria mapa satélite do RS
+        const OW_KEY = "3afeb284954c8955c926203ff7f0cc99";
         const map = L.map('satellite-frame', {
             zoomControl: false,
             attributionControl: false
         }).setView([-30.0, -52.5], 6);
 
+        // Terreno
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // NUVENS AO VIVO
+        L.tileLayer(`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${OW_KEY}`, {
+            opacity: 0.8,
             maxZoom: 19
         }).addTo(map);
     </script>
