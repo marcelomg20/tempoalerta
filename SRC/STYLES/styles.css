@@ -270,7 +270,7 @@ body {
     margin-right: 8px;
 }
 
-/* ===== BOX SATÉLITE FINAL ===== */
+/* ===== BOX SATÉLITE FINAL COM PROXY ===== */
 #satellite-box {
     background-color: #051c5ce0;
     border-radius: 10px;
