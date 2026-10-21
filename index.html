@@ -35,11 +35,12 @@
         <a href="https://nivelguaiba.com.br/" class="inpe-link" target="_blank"><i class="fa-solid fa-water"></i> Nível do Guaíba</a>
         <a href="https://avisos.inmet.gov.br" class="alert-link" target="_blank"><i class="fa-solid fa-exclamation-triangle"></i> Alertas do INMET</a>
     </div>
-    <script src="SRC/JAVASCRIPT/script.js"></script>
-    <script>
-        const map = L.map('satellite-frame', {zoomControl:false, attributionControl:false}).setView([-30.0, -52.5], 6);
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png').addTo(map);
-    </script>
+    <script src="SRC/JAVASCRIPT/script.js?v=3"></script>
+<script>
+    const map = L.map('satellite-frame', {zoomControl:false, attributionControl:false}).setView([-30.0, -52.5], 6);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png').addTo(map);
+</script>
+    
 </body>
 </html>
