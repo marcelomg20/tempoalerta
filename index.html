@@ -17,76 +17,29 @@
             <input type="search" name="city_name" id="city_name" placeholder="Digite outra cidade">
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
-
         <div id="weather">
             <h1 id="title"></h1>
             <div id="forecast-container">
                 <div id="temp">
-                    <div id="left">
-                        <img id="temp_img" src="" alt="">
-                        <p id="temp_description"></p>
-                    </div>
-                    <div id="right">
-                        <p id="temp_value"><sup>°C</sup></p>
-                        <div id="additional-info">
-                            <p><i class="fa-solid fa-droplet"></i> <span id="humidity"></span></p>
-                            <p><i class="fa-solid fa-wind"></i> <span id="wind"></span></p>
-                        </div>
-                    </div>
+                    <div id="left"><img id="temp_img" src="" alt=""><p id="temp_description"></p></div>
+                    <div id="right"><p id="temp_value"><sup>°C</sup></p><div id="additional-info"><p><i class="fa-solid fa-droplet"></i> <span id="humidity"></span></p><p><i class="fa-solid fa-wind"></i> <span id="wind"></span></p></div></div>
                 </div>             
             </div>
         </div>
-
         <div id="satellite-box">
             <h3><i class="fa-solid fa-satellite"></i> Satélite - Rio Grande do Sul</h3>
             <div id="satellite-frame"></div>
-            <p class="satellite-legenda">Colorido = chuva ao vivo</p>
+            <p class="satellite-legenda">Satélite ao vivo</p>
         </div>
-
         <a href="forecast.html" class="forecast-link"><i class="fa-solid fa-calendar-alt"></i> Próximos dias</a>
         <a href="https://nivelguaiba.com.br/" class="inpe-link" target="_blank"><i class="fa-solid fa-water"></i> Nível do Guaíba</a>
         <a href="https://avisos.inmet.gov.br" class="alert-link" target="_blank"><i class="fa-solid fa-exclamation-triangle"></i> Alertas do INMET</a>
     </div>
-
     <script src="SRC/JAVASCRIPT/script.js"></script>
     <script>
-        const map = L.map('satellite-frame', {
-            zoomControl: false,
-            attributionControl: false
-        }).setView([-30.0, -52.5], 6);
-
-        // Fundo satélite
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 19
-        }).addTo(map);
-
-        // Radar e satélite SEM precisar de API KEY - com proteção de erro
-        fetch('https://api.rainviewer.com/public/weather-maps.json')
-        .then(r => r.json())
-        .then(data => {
-            try {
-                // Radar de chuva
-                if (data.radar && data.radar.past && data.radar.past.length > 0) {
-                    const radarPath = data.radar.past[data.radar.past.length - 1].path;
-                    L.tileLayer(data.host + radarPath + '/256/{z}/{x}/{y}/2/1_1.png', {
-                        opacity: 0.8
-                    }).addTo(map);
-                }
-                // Nuvens satélite
-                if (data.satellite && data.satellite.infrared && data.satellite.infrared.length > 0) {
-                    const satPath = data.satellite.infrared[data.satellite.infrared.length - 1].path;
-                    L.tileLayer(data.host + satPath + '/256/{z}/{x}/{y}/2/1_1.png', {
-                        opacity: 0.6
-                    }).addTo(map);
-                }
-            } catch(e){ console.log('Erro satélite', e); }
-        })
-        .catch(e => console.log('RainViewer fora', e));
-
-        // Nomes das cidades por cima
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19
-        }).addTo(map);
+        const map = L.map('satellite-frame', {zoomControl:false, attributionControl:false}).setView([-30.0, -52.5], 6);
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png').addTo(map);
     </script>
 </body>
 </html>
