@@ -44,11 +44,14 @@
             </div>
         </div>
 
-        <!-- BOX SATÉLITE RS - FUNCIONA NO GITHUB PAGES -->
+        <!-- BOX SATÉLITE RS - VERSÃO FINAL COM PROXY -->
         <div id="satellite-box">
             <h3><i class="fa-solid fa-satellite"></i> Satélite - Rio Grande do Sul</h3>
             <div id="satellite-frame">
-                <img id="sat_img" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/bz/GEOCOLOR/1800x1080.jpg" alt="Satélite GOES-16 Brasil">
+                <img id="sat_img" 
+                     src="https://images.weserv.nl/?url=cdn.star.nesdis.noaa.gov%2FGOES16%2FABI%2FSECTOR%2Fbz%2FGEOCOLOR%2F1800x1080.jpg&w=400&h=200&fit=cover"
+                     alt="Satélite GOES-16 Brasil"
+                     crossorigin="anonymous">
             </div>
             <p class="satellite-legenda">GOES-16 / 【entity-NOAA¦canonical_name=NOAA】 - Atualiza a cada 10 min</p>
         </div>
@@ -62,11 +65,10 @@
     <script src="SRC/JAVASCRIPT/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Atualiza satélite sozinho a cada 10 minutos
         function atualizarSatelite() {
             const img = document.getElementById('sat_img');
             if(img) {
-                img.src = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/bz/GEOCOLOR/1800x1080.jpg?t=" + new Date().getTime();
+                img.src = "https://images.weserv.nl/?url=cdn.star.nesdis.noaa.gov%2FGOES16%2FABI%2FSECTOR%2Fbz%2FGEOCOLOR%2F1800x1080.jpg&w=400&h=200&fit=cover&t=" + new Date().getTime();
             }
         }
         setInterval(atualizarSatelite, 600000);
