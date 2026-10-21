@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="icon" type="image/png" href="SRC/images/bandeirars.png">
+    <link rel="icon" type="image/png" href="https://marcelomg20.github.io/tempoalerta/my-favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="https://marcelomg20.github.io/tempoalerta/my-favicon/favicon.svg" />
+    <link rel="shortcut icon" href="https://marcelomg20.github.io/tempoalerta/my-favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://marcelomg20.github.io/tempoalerta/my-favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="#FORÇARS" />
+    <link rel="manifest" href="https://marcelomg20.github.io/tempoalerta/my-favicon/site.webmanifest" />
     <title>#FORÇARS</title>
 </head>
 <body>
     <div id="alert"></div>
     <div id="container">
+        
         <form id="search">
             <i class="fa-solid fa-location-dot"></i>
             <input type="search" name="city_name" id="city_name" placeholder="Digite outra cidade">
@@ -38,11 +45,11 @@
             </div>
         </div>
 
-        <!-- BOX SATÉLITE COM NUVENS -->
+        <!-- BOX SATÉLITE COM NUVENS + CHUVA + CIDADES -->
         <div id="satellite-box">
             <h3><i class="fa-solid fa-satellite"></i> Satélite - Rio Grande do Sul</h3>
             <div id="satellite-frame"></div>
-            <p class="satellite-legenda">Nuvens ao vivo - OpenWeather</p>
+            <p class="satellite-legenda">Branco = nuvens | Colorido = chuva</p>
         </div>
 
         <a href="forecast.html" class="forecast-link"><i class="fa-solid fa-calendar-alt"></i> Próximos dias</a>
@@ -51,6 +58,7 @@
     </div>
 
     <script src="SRC/JAVASCRIPT/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const OW_KEY = "3afeb284954c8955c926203ff7f0cc99";
         const map = L.map('satellite-frame', {
@@ -58,14 +66,25 @@
             attributionControl: false
         }).setView([-30.0, -52.5], 6);
 
-        // Terreno
+        // 1. Fundo satélite real
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 19
         }).addTo(map);
 
-        // NUVENS AO VIVO
+        // 2. Todas as nuvens
         L.tileLayer(`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${OW_KEY}`, {
-            opacity: 0.8,
+            opacity: 0.6,
+            maxZoom: 19
+        }).addTo(map);
+
+        // 3. Só nuvem de CHUVA (aparece colorido quando está chovendo)
+        L.tileLayer(`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${OW_KEY}`, {
+            opacity: 0.7,
+            maxZoom: 19
+        }).addTo(map);
+
+        // 4. Nomes das cidades e fronteiras por cima
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
             maxZoom: 19
         }).addTo(map);
     </script>
