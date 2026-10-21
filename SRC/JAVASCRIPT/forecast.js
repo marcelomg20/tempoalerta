@@ -19,13 +19,11 @@ function displayForecast(forecastList) {
 
     const daysForecast = {};
     
-    // Organiza os itens por dia da semana e horário
     forecastList.forEach((item) => {
         const date = new Date(item.dt * 1000);
         const day = date.toLocaleDateString('pt-BR', { weekday: 'long' });
         const hour = date.getHours();
 
-        // Somente horários 06:00, 12:00 e 18:00
         if ([6, 12, 18].includes(hour)) {
             if (!daysForecast[day]) {
                 daysForecast[day] = [];
@@ -34,24 +32,24 @@ function displayForecast(forecastList) {
         }
     });
 
-    // Renderiza os dados de previsão para cada dia
     Object.keys(daysForecast).forEach((day) => {
-        const dayContainer = document.createElement('div');
-        dayContainer.classList.add('day-forecast');
-
-        // Obtém a data correspondente ao primeiro item do dia
         const firstItemDate = new Date(daysForecast[day][0].dt * 1000);
         const formattedDate = firstItemDate.toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: '2-digit'
-        }); // Sem o ano
+        });
 
-        const dayTitle = document.createElement('h3');
-        dayTitle.textContent = `${day.toUpperCase()} - ${formattedDate}`; // Adiciona a data sem o ano
+        // CRIA O BLOCO DO DIA COM AS CLASSES NOVAS
+        const dayContainer = document.createElement('div');
+        dayContainer.classList.add('dia-bloco');
+
+        const dayTitle = document.createElement('div');
+        dayTitle.classList.add('dia-titulo');
+        dayTitle.textContent = `${day.toUpperCase()} - ${formattedDate}`;
         dayContainer.appendChild(dayTitle);
 
         const itemsContainer = document.createElement('div');
-        itemsContainer.classList.add('forecast-items-container');
+        itemsContainer.classList.add('horarios-linha');
 
         daysForecast[day].forEach((item) => {
             const time = new Date(item.dt * 1000).toLocaleTimeString('pt-BR', {
@@ -60,12 +58,12 @@ function displayForecast(forecastList) {
             });
 
             const forecastItem = document.createElement('div');
-            forecastItem.classList.add('forecast-item');
+            forecastItem.classList.add('horario-item');
             forecastItem.innerHTML = `
-                <p>${time}</p>
+                <div style="font-weight:bold">${time}</div>
                 <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png" alt="${item.weather[0].description}">
-                <p>${item.main.temp.toFixed(1)}°C</p>
-                <p>${item.weather[0].description}</p> <!-- Alt exibido abaixo da imagem -->
+                <div style="font-weight:bold">${item.main.temp.toFixed(1)}°C</div>
+                <div style="font-size:11px">${item.weather[0].description}</div>
             `;
             itemsContainer.appendChild(forecastItem);
         });
