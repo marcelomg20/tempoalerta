@@ -71,10 +71,6 @@ body {
     margin-top: 20px;
 }
 
-#weather.show {
-    display: block;
-}
-
 #weather #title{
     text-align: center;
     margin-bottom: 5px;
@@ -88,7 +84,6 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    gap: 0px;
 }
 
 #left {
@@ -125,17 +120,6 @@ body {
     color: #fffefe;
 }
 
-#alert img {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#alert img {
-    width: 20px;
-    margin-top: 20px;
-}
-
 .forecast-link, .back-link {
     display: block;
     text-align: center;
@@ -146,74 +130,6 @@ body {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-}
-
-#forecast {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-width: 150px;
-}
-
-.day-forecast {
-    margin-bottom: 16px;
-    padding: 10px;
-    background-color: #f1bd11;
-    border-radius: 8px;
-    min-width: 330px;
-}
-
-.day-forecast h3 {
-    margin: 0;
-    font-size: 0.6em;
-    color: #fffafa;
-    align-content: center;
-    text-transform: uppercase;
-}
-
-.day-forecast-items {
-    display: flex;
-    justify-content: space-around;
-    gap: 5px;
-}
-
-.forecast-item {
-    flex: 1;
-    max-width: 100px;
-    align-items: center;
-}
-
-.forecast-item img {
-    width: 90px;
-    height: auto;
-    align-content: center;
-    display: block;
-    padding-left: 10px;
-}
-
-.forecast-item p {
-    font-size: 1.0rem;
-    font-weight: 550;  
-    color: #000000;
-    text-align: center;
-}
-
-.forecast-items-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-@media (max-width: 768px) {
-    .day-forecast {
-        padding: 8px;
-    }
-    .day-forecast h3 {
-        font-size: 1em;
-    }
-    .forecast-item {
-        width: 28%;
-        font-size: 0.8em;
-    }
 }
 
 .alert-link {
@@ -240,13 +156,8 @@ body {
     font-weight: bold;
 }
 
-.alert-link:hover {
-    background-color: #c9302c;
-}
-
 #additional-info {
     margin-top: 10px;
-    margin-bottom: 0px;
     font-size: 0.9em;
     color: #ffffff;
     font-weight: 550;
@@ -264,52 +175,11 @@ body {
     font-size: 19px;
 }    
 
-.forecast-link i,
-.inpe-link i,
-.alert-link i {
+.forecast-link i, .inpe-link i, .alert-link i {
     margin-right: 8px;
 }
 
-/* ===== BOX SATÉLITE FINAL COM PROXY ===== */
-#satellite-box {
-    background-color: #051c5ce0;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
-}
-
-#satellite-box h3 {
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-#satellite-frame {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #000;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-#satellite-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.satellite-legenda {
-    font-size: 10px;
-    color: #d1d5db;
-    text-align: center;
-    margin-top: 6px;
-}
-/* ===== BOX SATÉLITE MAPA REAL ===== */
+/* ===== BOX SATÉLITE FINAL ===== */
 #satellite-box {
     background-color: #051c5ce0;
     border-radius: 10px;
@@ -340,4 +210,5 @@ body {
     text-align: center;
     margin-top: 6px;
 }
+
 .leaflet-control-attribution { display: none; }
