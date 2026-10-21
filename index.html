@@ -26,52 +26,44 @@
         </form>
 
         <div id="weather">
-            <h1 id="title">Porto Alegre, BR</h1>
+            <h1 id="title"></h1>
             <div id="forecast-container">
                 <div id="temp">
                     <div id="left">
-                        <img id="temp_img" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
-                        <p id="temp_description">algumas nuvens</p>
+                        <img id="temp_img" src="" alt="">
+                        <p id="temp_description"></p>
                     </div>
                     <div id="right">
-                        <p id="temp_value">23,8 <sup>°C</sup></p>
+                        <p id="temp_value"><sup>°C</sup></p>
                         <div id="additional-info">
-                            <p><i class="fa-solid fa-droplet"></i> <span id="humidity">60%</span></p>
-                            <p><i class="fa-solid fa-wind"></i> <span id="wind">22.2 km/h</span></p>
+                            <p><i class="fa-solid fa-droplet"></i> <span id="humidity"></span></p>
+                            <p><i class="fa-solid fa-wind"></i> <span id="wind"></span></p>
                         </div>
                     </div>
                 </div>             
             </div>
         </div>
 
-        <!-- NOVO BOX DE SATÉLITE -->
+        <!-- BOX SATÉLITE - VERSÃO FINAL QUE FUNCIONA -->
         <div id="satellite-box">
             <h3><i class="fa-solid fa-satellite"></i> Satélite - Rio Grande do Sul</h3>
             <div id="satellite-frame">
-                <img id="sat_img" src="https://satelite.inmet.gov.br/images/goes16/realcada/amsul_real.png" alt="Imagem de satélite RS">
+                <iframe 
+                    src="https://embed.windy.com/embed2.html?lat=-30.2&lon=-52.0&zoom=6&level=surface&overlay=satellite&product=satellite&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km/h&metricTemp=%C2%B0C&radarRange=-1"
+                    frameborder="0"
+                    loading="lazy">
+                </iframe>
             </div>
-            <p class="satellite-legenda">GOES-16 / INMET - Atualiza a cada 10 min</p>
+            <p class="satellite-legenda">GOES-16 / Windy - Ao vivo</p>
         </div>
 
-        <!-- Botões de navegação -->
         <a href="forecast.html" class="forecast-link"><i class="fa-solid fa-calendar-alt"></i> Próximos dias</a>
         <a href="https://nivelguaiba.com.br/" class="inpe-link" target="_blank"><i class="fa-solid fa-water"></i> Nível do Guaíba</a>
-        <a href="https://avisos.inmet.gov.br" class="alert-link" target="_blank"><i class="fa-solid fa-triangle-exclamation"></i> Alertas do INMET</a>
+        <a href="https://avisos.inmet.gov.br" class="alert-link" target="_blank"><i class="fa-solid fa-exclamation-triangle"></i> Alertas do INMET</a>
         
     </div>
 
     <script src="SRC/JAVASCRIPT/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // Força atualização da imagem de satélite
-        function atualizarSatelite() {
-            const img = document.getElementById('sat_img');
-            if(img) {
-                const t = new Date().getTime();
-                img.src = "https://satelite.inmet.gov.br/images/goes16/realcada/amsul_real.png?t=" + t;
-            }
-        }
-        setInterval(atualizarSatelite, 600000);
-    </script>
 </body>
 </html>
