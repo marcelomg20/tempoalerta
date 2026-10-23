@@ -107,14 +107,13 @@ body {
     margin: 0;
 }
 #temp_img {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     object-fit: contain;
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
-    margin: -10px 0 -12px 0;
-    transform: scale(1.25);
+    margin: 0;
+    transform: scale(1.1);
 }
-
 #temp_value {
     font-size: 2.3em;
     font-weight: bold;
@@ -124,15 +123,14 @@ body {
 }
 
 #temp_description {
-    margin-top: 8px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 600;
+    margin-top: 4px;
+    font-size: 11px;
+    font-weight: 700;
     color: #ffffff;
     background: none;
     padding: 0;
-    border-radius: 0;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 .forecast-link, .back-link {
