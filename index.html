@@ -59,11 +59,15 @@
             try {
                 if (data.radar && data.radar.past && data.radar.past.length > 0) {
                     const radarPath = data.radar.past[data.radar.past.length - 1].path;
-                    L.tileLayer(data.host + radarPath + '/256/{z}/{x}/{y}/2/1_1.png', {opacity: 0.85}).addTo(window.map);
+                    L.tileLayer(data.host + radarPath + '/256/{z}/{x}/{y}/2/1_1.png', {
+    opacity: 0.85,
+    maxZoom: 8,
+    maxNativeZoom: 8
+}).addTo(window.map);
                 }
             } catch(e){}
         });
     </script>
-    <script src="SRC/JAVASCRIPT/script.js?v=7"></script>
+    <script src="SRC/JAVASCRIPT/script.js?v=8"></script>
 </body>
 </html>
