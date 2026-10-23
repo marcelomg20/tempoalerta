@@ -59,7 +59,7 @@ body {
 }
 #temp_value {
     font-size: 38px; font-weight: 800; color: #ffffff;
-    line-height: 1; margin: 0; text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    line-height: 1; margin: 1; text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 #temp_value sup { font-size: 18px; font-weight: 600; opacity: 0.9; }
 
