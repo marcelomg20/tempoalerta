@@ -34,7 +34,7 @@ async function loadWeatherData(cityName) {
             humidity: json.main.humidity,
         });
 
-        updateMapPosition(json.coord.lat, json.coord.lon, json.name);
+        updateMapPosition(json.coord.lat, json.coord.lon);
 
         const forecastResults = await fetch(apiUrlForecast);
         const forecastJson = await forecastResults.json();
@@ -44,18 +44,18 @@ async function loadWeatherData(cityName) {
     }
 }
 
-function updateMapPosition(lat, lon, cityName) {
-    const mapa = window.map; // Pega o mapa que foi criado no index.html
+function updateMapPosition(lat, lon) {
+    const mapa = window.map;
     if (!mapa) return;
 
+    // Zoom 6 - visão perfeita das nuvens
     mapa.flyTo([lat, lon], 6, { duration: 1.5 });
 
     if (cityMarker) {
         mapa.removeLayer(cityMarker);
     }
-    cityMarker = L.marker([lat, lon]).addTo(mapa)
-        .bindPopup(`<b>${cityName}</b>`)
-        .openPopup();
+    // Pino azul sem balão branco
+    cityMarker = L.marker([lat, lon]).addTo(mapa);
 }
 
 function showInfo(json) {
