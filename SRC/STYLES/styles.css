@@ -49,20 +49,26 @@ body {
 #temp {
     display: flex;
     justify-content: space-around;
-    align-items: flex-end; /* antes era center, agora alinha embaixo */
+    align-items: flex-end !important; /* ALINHA TUDO EMBAIXO */
     width: 100%;
-    padding: 12px 0 8px 0;
+    padding: 10px 0 4px 0;
 }
-#left { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
 #right {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    gap: 6px;
-    margin-top: 22px; /* empurra tudo pra baixo pra alinhar com CÉU LIMPO */
-    padding-bottom: 2px;
+    gap: 4px;
+    padding-bottom: 4px !important; /* sobe só um pouquinho pra ficar na linha do NUBLADO */
+    margin-top: 16px !important;
 }
+
 
 #temp_img {
     width: 130px; height: 90px; object-fit: contain;
@@ -79,8 +85,20 @@ body {
     color: #ffffff; text-transform: uppercase; letter-spacing: 1px;
 }
 
-#additional-info p { display: flex; align-items: center; margin: 4px 0; color: #ffffff; font-weight: 600; font-size: 15px; }
-#additional-info i { margin-right: 6px; color: #ffffff; font-size: 17px; opacity: 0.9; }
+#additional-info p { 
+  display: flex; 
+  align-items: center; 
+  margin: 4px 0; 
+  color: #ffffff; 
+  font-weight: 600; 
+  font-size: 15px; 
+}
+#additional-info i { 
+  margin-right: 6px; 
+  color: #ffffff; 
+  font-size: 17px; 
+  opacity: 0.9; 
+}
 
 /* ===== LINKS ===== */
 .forecast-link, .back-link, .alert-link, .inpe-link {
