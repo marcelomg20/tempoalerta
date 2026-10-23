@@ -1,3 +1,6 @@
+// Variável global pro marcador pra não duplicar
+let cityMarker = null;
+
 document.addEventListener("DOMContentLoaded", async () => {
     await loadWeatherData("Porto Alegre");
 });
@@ -37,7 +40,13 @@ async function loadWeatherData(cityName) {
             tempIcon: json.weather[0].icon,
             windSpeed: json.wind.speed,
             humidity: json.main.humidity,
+            // NOVO: pegando coordenadas
+            lat: json.coord.lat,
+            lon: json.coord.lon
         });
+
+        // NOVO: Move o mapa pra cidade pesquisada
+        updateMapPosition(json.coord.lat, json.coord.lon, json.name);
 
         const forecastResults = await fetch(apiUrlForecast);
         const forecastJson = await forecastResults.json();
@@ -48,6 +57,28 @@ async function loadWeatherData(cityName) {
             icon: "warning"
           });
         return;
+    }
+}
+
+// NOVA FUNÇÃO: Atualiza o mapa
+function updateMapPosition(lat, lon, cityName) {
+    // 'map' é a variável que você criou no outro arquivo do Leaflet
+    // Se seu mapa se chama diferente (ex: mymap), troca aqui
+    if (typeof map !== 'undefined' && map) {
+        // Voa suavemente pra nova cidade
+        map.flyTo([lat, lon], 10, {
+            duration: 1.5 // 1.5 segundos de animação
+        });
+
+        // Remove marcador antigo se existir
+        if (cityMarker) {
+            map.removeLayer(cityMarker);
+        }
+
+        // Adiciona novo marcador
+        cityMarker = L.marker([lat, lon]).addTo(map)
+            .bindPopup(`<b>${cityName}</b>`)
+            .openPopup();
     }
 }
 
