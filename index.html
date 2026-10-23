@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="SRC/STYLES/styles.css">
+    <link rel="stylesheet" href="SRC/STYLES/styles.css?v=14">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -25,8 +25,8 @@
         <div id="weather" class="unified-box">
             <h1 id="title"></h1>
             <div id="forecast-container">
-                <div id="temp" style="flex-direction: column; gap: 15px;">
-                    <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                <div id="temp-wrapper" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div id="temp">
                         <div id="left">
                             <img id="temp_img" src="" alt="">
                             <p id="temp_description"></p>
@@ -50,7 +50,6 @@
     </div>
 
     <script>
-        // Cria o mapa ANTES do script.js e deixa global
         window.map = L.map('satellite-frame', {zoomControl:false, attributionControl:false}).setView([-30.0, -52.5], 6);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(window.map);
         fetch('https://api.rainviewer.com/public/weather-maps.json')
@@ -68,6 +67,6 @@
             } catch(e){}
         });
     </script>
-    <script src="SRC/JAVASCRIPT/script.js?v=13"></script>
+    <script src="SRC/JAVASCRIPT/script.js?v=14"></script>
 </body>
 </html>
