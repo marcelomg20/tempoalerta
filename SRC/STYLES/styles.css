@@ -238,3 +238,81 @@ body {
     text-align: center !important; 
     color: #111 !important; 
 }
+
+/* ===== BUSCA ESTILIZADA ===== */
+#search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 8px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.2s ease;
+}
+
+#search:focus-within {
+    border-color: #051c5c;
+    box-shadow: 0 4px 12px rgba(5,28,92,0.15);
+}
+
+#search i.fa-location-dot {
+    color: #051c5c;
+    font-size: 18px;
+}
+
+#search input {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    width: 100%;
+    color: #334155;
+}
+
+#search input::placeholder {
+    color: #94a3b8;
+}
+
+#search button {
+    background: #051c5c;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: 0.2s;
+}
+
+#search button:hover {
+    background: #0a2a8a;
+}
+
+/* ===== CIDADE ATUAL COM DESTAQUE ===== */
+#weather #title {
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 19px;
+    color: #051c5c;
+    letter-spacing: -0.3px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+#weather #title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: #28a745;
+    border-radius: 10px;
+}
