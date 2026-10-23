@@ -1,15 +1,12 @@
 let cityMarker = null;
-let map = null; // Vamos guardar o mapa aqui
 
 document.addEventListener("DOMContentLoaded", async () => {
-    initMap(); // Cria o mapa assim que a página carrega
     await loadWeatherData("Porto Alegre");
 });
 
 document.querySelector('#search').addEventListener('submit', async (event) => {
     event.preventDefault();
     const cityName = document.querySelector('#city_name').value;
-
     if (!cityName) {
         Swal.fire({ text: "Você precisa digitar uma cidade!", icon: "warning" });
         return;
@@ -17,19 +14,6 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
     await loadWeatherData(cityName);
     localStorage.setItem('selectedCity', cityName);
 });
-
-// NOVA FUNÇÃO: Inicializa o mapa uma única vez
-function initMap() {
-    const mapElement = document.querySelector('#map');
-    if (!mapElement) return; // Se não tem div #map na página, não faz nada
-
-    if (!map) {
-        map = L.map('map').setView([-30.0346, -51.2177], 8); // Começa em POA
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-    }
-}
 
 async function loadWeatherData(cityName) {
     const api = '3afeb284954c8955c926203ff7f0cc99';
@@ -44,8 +28,6 @@ async function loadWeatherData(cityName) {
             city: json.name,
             country: json.sys.country,
             temp: json.main.temp,
-            tempMax: json.main.temp_max,
-            tempMin: json.main.temp_min,
             description: json.weather[0].description,
             tempIcon: json.weather[0].icon,
             windSpeed: json.wind.speed,
@@ -63,18 +45,17 @@ async function loadWeatherData(cityName) {
 }
 
 function updateMapPosition(lat, lon, cityName) {
-    if (!map) initMap(); // Garante que o mapa existe
-    
-    if (map) {
-        map.flyTo([lat, lon], 10, { duration: 1.5 });
+    const mapa = window.map; // Pega o mapa que foi criado no index.html
+    if (!mapa) return;
 
-        if (cityMarker) {
-            map.removeLayer(cityMarker);
-        }
-        cityMarker = L.marker([lat, lon]).addTo(map)
-            .bindPopup(`<b>${cityName}</b>`)
-            .openPopup();
+    mapa.flyTo([lat, lon], 10, { duration: 1.5 });
+
+    if (cityMarker) {
+        mapa.removeLayer(cityMarker);
     }
+    cityMarker = L.marker([lat, lon]).addTo(mapa)
+        .bindPopup(`<b>${cityName}</b>`)
+        .openPopup();
 }
 
 function showInfo(json) {
@@ -93,7 +74,6 @@ function showCurrentDayForecast(forecastJson) {
     forecastContainer.innerHTML = "";
     const times = ["06:00:00", "12:00:00", "18:00:00"];
     const today = new Date().getDate();
-
     forecastJson.list.forEach((item) => {
         const forecastDate = new Date(item.dt * 1000);
         if (forecastDate.getDate() === today && times.includes(forecastDate.toTimeString().split(" ")[0])) {
