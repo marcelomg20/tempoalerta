@@ -48,7 +48,7 @@ function updateMapPosition(lat, lon, cityName) {
     const mapa = window.map; // Pega o mapa que foi criado no index.html
     if (!mapa) return;
 
-    mapa.flyTo([lat, lon], 10, { duration: 1.5 });
+    mapa.flyTo([lat, lon], 8, { duration: 1.5 });
 
     if (cityMarker) {
         mapa.removeLayer(cityMarker);
