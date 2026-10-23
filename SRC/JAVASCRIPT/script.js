@@ -1,7 +1,8 @@
-// Variável global pro marcador pra não duplicar
 let cityMarker = null;
+let map = null; // Vamos guardar o mapa aqui
 
 document.addEventListener("DOMContentLoaded", async () => {
+    initMap(); // Cria o mapa assim que a página carrega
     await loadWeatherData("Porto Alegre");
 });
 
@@ -10,16 +11,25 @@ document.querySelector('#search').addEventListener('submit', async (event) => {
     const cityName = document.querySelector('#city_name').value;
 
     if (!cityName) {
-        Swal.fire({
-            text: "Você precisa digitar uma cidade!",
-            icon: "warning"
-          });
+        Swal.fire({ text: "Você precisa digitar uma cidade!", icon: "warning" });
         return;
     }
-
     await loadWeatherData(cityName);
     localStorage.setItem('selectedCity', cityName);
 });
+
+// NOVA FUNÇÃO: Inicializa o mapa uma única vez
+function initMap() {
+    const mapElement = document.querySelector('#map');
+    if (!mapElement) return; // Se não tem div #map na página, não faz nada
+
+    if (!map) {
+        map = L.map('map').setView([-30.0346, -51.2177], 8); // Começa em POA
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+    }
+}
 
 async function loadWeatherData(cityName) {
     const api = '3afeb284954c8955c926203ff7f0cc99';
@@ -40,42 +50,27 @@ async function loadWeatherData(cityName) {
             tempIcon: json.weather[0].icon,
             windSpeed: json.wind.speed,
             humidity: json.main.humidity,
-            // NOVO: pegando coordenadas
-            lat: json.coord.lat,
-            lon: json.coord.lon
         });
 
-        // NOVO: Move o mapa pra cidade pesquisada
         updateMapPosition(json.coord.lat, json.coord.lon, json.name);
 
         const forecastResults = await fetch(apiUrlForecast);
         const forecastJson = await forecastResults.json();
         showCurrentDayForecast(forecastJson);
     } else {
-        Swal.fire({
-            text: "Cidade não encontrada! Tente novamente.",
-            icon: "warning"
-          });
-        return;
+        Swal.fire({ text: "Cidade não encontrada! Tente novamente.", icon: "warning" });
     }
 }
 
-// NOVA FUNÇÃO: Atualiza o mapa
 function updateMapPosition(lat, lon, cityName) {
-    // 'map' é a variável que você criou no outro arquivo do Leaflet
-    // Se seu mapa se chama diferente (ex: mymap), troca aqui
-    if (typeof map !== 'undefined' && map) {
-        // Voa suavemente pra nova cidade
-        map.flyTo([lat, lon], 10, {
-            duration: 1.5 // 1.5 segundos de animação
-        });
+    if (!map) initMap(); // Garante que o mapa existe
+    
+    if (map) {
+        map.flyTo([lat, lon], 10, { duration: 1.5 });
 
-        // Remove marcador antigo se existir
         if (cityMarker) {
             map.removeLayer(cityMarker);
         }
-
-        // Adiciona novo marcador
         cityMarker = L.marker([lat, lon]).addTo(map)
             .bindPopup(`<b>${cityName}</b>`)
             .openPopup();
@@ -95,9 +90,7 @@ function showInfo(json) {
 function showCurrentDayForecast(forecastJson) {
     const forecastContainer = document.querySelector("#forecast");
     if (!forecastContainer) return;
-    
     forecastContainer.innerHTML = "";
-
     const times = ["06:00:00", "12:00:00", "18:00:00"];
     const today = new Date().getDate();
 
@@ -114,9 +107,4 @@ function showCurrentDayForecast(forecastJson) {
             forecastContainer.appendChild(forecastItem);
         }
     });
-}
-
-function showAlert(msg) {
-    const alertEl = document.querySelector('#alert');
-    if(alertEl) alertEl.innerHTML = msg;
 }
