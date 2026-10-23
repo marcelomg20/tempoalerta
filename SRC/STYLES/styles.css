@@ -84,7 +84,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
     padding: 5px 0;
 }
@@ -94,13 +94,18 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
+    margin: 0;
 }
 
 #right {
-    display: block;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 0 0 auto;
+    margin: 0;
 }
-
 #temp_img {
     width: 100px;
     height: 100px;
