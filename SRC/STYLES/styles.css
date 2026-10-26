@@ -113,3 +113,21 @@ body {
 /* ===== SATÉLITE ===== */
 #satellite-frame { width: 100%; height: 280px; border-radius: 12px; overflow: hidden; background: #000; z-index: 1; }
 .leaflet-control-attribution { display: none; }
+
+/* ===== CORREÇÃO ESPAÇO EM CELULARES - COLA NO FINAL ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+        background-image: none;
+        background-color: #eff2F5;
+    }
+    #container {
+        max-width: 100%;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+    }
+}
